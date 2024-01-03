@@ -2,9 +2,9 @@ module.exports = function () {
     let mysql = require("mysql2");
 
     const conex = mysql.createConnection({
-                                            host:"localhost",
+                                            host:"db",
                                             user:"root",
-                                            password:"",
+                                            password:"123",
                                             database:"myDB",
                                             port:'3306'
                                         });
