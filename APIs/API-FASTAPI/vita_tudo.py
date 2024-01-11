@@ -141,22 +141,6 @@ def delete_user(username: str):
     return {"message": f"User {username} deleted successfully"}
 
 
-@app.post("/save_data")
-async def save_mqtt_data(data: MqttData, credentials: HTTPAuthorizationCredentials = Depends(security)):
-
-    token = credentials.credentials
-
-    user_email = decode_token(token)
-
-    user_id = get_user_id_by_email(user_email)
-
-    if user_id is not None:
-        query = "INSERT INTO dados (user_id, data) VALUES (%s, %s)"
-        cursor.execute(query, (user_id, data.data))
-        connection.commit()
-        return {"message": "Data received and saved successfully"}
-    else:
-        raise HTTPException(status_code=401, detail="User not found")
 
 def decode_token(token: str) -> str:
     try:
@@ -186,8 +170,8 @@ def generate_token(email: str) -> str:
     token = jwt_encode(payload, SECRET_KEY, algorithm="HS256")
     return token
 
-@app.post("/script")
-async def script():
+@app.post("/export")
+async def export():
     try:
         subprocess.run(['jupyter','nbconverter','--to','pdf','Untitled.ipynb'])
     except Exception as e:
