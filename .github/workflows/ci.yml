@@ -10,7 +10,9 @@ jobs:
     name: Deploy apps to prod
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
       - name: Deploy
         uses: easingthemes/ssh-deploy@main
         env:
