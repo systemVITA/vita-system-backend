@@ -1,4 +1,4 @@
-name: back Prod
+name: Back Prod
 
 on:
   push:
@@ -10,9 +10,7 @@ jobs:
     name: Deploy apps to prod
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-
+      - uses: actions/checkout@v2
       - name: Deploy
         uses: easingthemes/ssh-deploy@main
         env:
