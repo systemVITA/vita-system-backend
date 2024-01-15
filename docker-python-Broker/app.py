@@ -3,7 +3,7 @@ import requests
 import json
 
 
-mqtt_broker = "mosquitto"
+mqtt_broker = "172.18.0.2"
 mqtt_port = 1883
 mqtt_topic = "/messages"
 
