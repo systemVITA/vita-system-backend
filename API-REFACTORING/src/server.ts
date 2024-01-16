@@ -2,14 +2,14 @@ import 'express-async-errors';
 /* import cors from 'cors'; */
 import Express, { NextFunction, Request, Response } from 'express';
 import router from './routes';
-import { UserRepository } from './repositories/UserRepository';
+/* import { UserRepository } from './repositories/UserRepository'; */
 /* import Usercontrollers from './controllers/Usercontrollers'; */
 /* import Dadoscontrollers from './controllers/Dadoscontrollers';*/
 
-const userRepository = new UserRepository();
+/* const userRepository = new UserRepository();
     const user = userRepository.create("Nerval de Junior", "nervaljunior123@gmail.com", "123456");
     console.log("User created:", user);
-
+ */
 
 const app = Express();
 const PORT = 8000;
