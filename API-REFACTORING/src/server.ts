@@ -1,22 +1,28 @@
-/* import 'express-async-errors'; */
+import 'express-async-errors';
 /* import cors from 'cors'; */
 import Express, { NextFunction, Request, Response } from 'express';
+import router from './routes';
+import { UserRepository } from './repositories/UserRepository';
 /* import Usercontrollers from './controllers/Usercontrollers'; */
-/* import Dadoscontrollers from './controllers/Dadoscontrollers';
-import router from './routes'; */
+/* import Dadoscontrollers from './controllers/Dadoscontrollers';*/
+
+const userRepository = new UserRepository();
+    const user = userRepository.create("Nerval de Junior", "nervaljunior123@gmail.com", "123456");
+    console.log("User created:", user);
+
 
 const app = Express();
-/* app.use(Express.json()); */
 const PORT = 8000;
+app.use(Express.json());
 
-/* app.use((error: Error,req: Request,res: Response, next: NextFunction)=>{
+app.use((error: Error,req: Request,res: Response, next: NextFunction)=>{
 
     return res.json({
         status: 'Error',
         message: error.message
     });
     next();
-}); */
+});
 /* app.use((error: Error, req: Request, res: Response, next: NextFunction) => {
   res.header('Access-Control-Allow-Origin', "*");
   res.header("Access-Control-Allow-Headers", "*");
@@ -25,12 +31,12 @@ const PORT = 8000;
   next();
 }); */
 
-/* app.get('/', (req, res) => {
+app.get('/', (req, res) => {
     return res.send({ message: 'hello world' });
-}); */
+});
 
-/* app.use(router);
- */
+app.use(router);
+
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 /* app.use((error: Error, req: Request, res: Response, next: NextFunction) => {
     if (error instanceof Error) {
