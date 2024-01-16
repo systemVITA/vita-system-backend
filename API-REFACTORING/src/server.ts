@@ -1,13 +1,19 @@
 import 'express-async-errors';
 /* import cors from 'cors'; */
 import Express, { NextFunction, Request, Response } from 'express';
-/* import Usercontrollers from './controllers/Usercontrollers'; */
-import Dadoscontrollers from './controllers/Dadoscontrollers';
 import router from './routes';
+/* import { UserRepository } from './repositories/UserRepository'; */
+/* import Usercontrollers from './controllers/Usercontrollers'; */
+/* import Dadoscontrollers from './controllers/Dadoscontrollers';*/
+
+/* const userRepository = new UserRepository();
+    const user = userRepository.create("Nerval de Junior", "nervaljunior123@gmail.com", "123456");
+    console.log("User created:", user);
+ */
 
 const app = Express();
-app.use(Express.json());
 const PORT = 8000;
+app.use(Express.json());
 
 app.use((error: Error,req: Request,res: Response, next: NextFunction)=>{
 
@@ -32,7 +38,7 @@ app.get('/', (req, res) => {
 app.use(router);
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-app.use((error: Error, req: Request, res: Response, next: NextFunction) => {
+/* app.use((error: Error, req: Request, res: Response, next: NextFunction) => {
     if (error instanceof Error) {
         return res.status(500).json({
             status: 'Error',
@@ -44,14 +50,14 @@ app.use((error: Error, req: Request, res: Response, next: NextFunction) => {
         status: 'Error',
         message: 'Internal Server Error',
     });
-});
+}); */
 
 /* app.post('/createUser', Usercontrollers.createUser); */
-app.post('/createDados', Dadoscontrollers.createDados);
+/* app.post('/createDados', Dadoscontrollers.createDados);
 app.get('/listDados/:id', Dadoscontrollers.listDados);
 app.put('/updateDados', Dadoscontrollers.updateDados);
 app.delete('/deleteDados', Dadoscontrollers.deleteDados);
-
+ */
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });

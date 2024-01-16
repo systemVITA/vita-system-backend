@@ -1,6 +1,6 @@
-/* import { User } from '@prisma/client';
+import { User } from '@prisma/client';
 import { IUserAuthenticate } from '../interfaces/IUserAuthenticate';
-import prisma from '../database';
+import { prisma } from '../database';
 import jwt from 'jsonwebtoken';
 import { compare } from 'bcrypt';
 
@@ -15,7 +15,7 @@ class AuthRepository implements IUserAuthenticate {
         if (!checkPassword) {
             throw new Error('Error: usuário ou senha incorretos: Senha');}
   
-        const token = jwt.sign({ id: user.id }, 'secret', {
+        const token = jwt.sign({ id: user.id }, 'secret'/* colocar um token aqui do .env */, {
             expiresIn: '1d'
         });
         
@@ -25,4 +25,4 @@ class AuthRepository implements IUserAuthenticate {
     }
 }
   
-export { AuthRepository }; */
+export { AuthRepository };
