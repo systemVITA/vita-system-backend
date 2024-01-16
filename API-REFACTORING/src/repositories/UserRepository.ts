@@ -1,35 +1,33 @@
-import { hashSync } from 'bcrypt';
+import { hashSync, genSaltSync } from 'bcrypt';
 import { prisma } from '../database';
 import { IUserCreate } from '../interfaces/IUserCreate';
+import { User } from '@prisma/client';
 
 class UserRepository implements IUserCreate {
-    public async create(name: string, email: string, password: string): Promise<{ id: number; name: string; email: string; password: string; }> {
-        try {
 
-            const userExists = await prisma.user.findFirst({
-                where: { email },
-            });
+    public async create(name: string, email: string, password: string): Promise<User> {
 
-            if (userExists) {
-                throw new Error('Erro: usuário já existe');
-            }
+        const userExists = await prisma.user.findFirst({
+            where: { email },
+        });
 
-            const saltRounds = 10; 
-            const HashPassword = hashSync(password, saltRounds);
-
-            const user = await prisma.user.create({
-                data: {
-                    name,
-                    email,
-                    password: HashPassword,
-                },
-            });
-
-            return user;
-        } catch (error) {
-            throw new Error(`Erro ao criar usuário: ${error.message}`);
+        if (userExists) {
+            throw new Error('Erro: usuário já existe');
         }
-    }
+
+        const salt = genSaltSync(10);
+        const hashedPassword = hashSync(password, salt);
+
+        const user = await prisma.user.create({
+            data: {
+                name,
+                email,
+                password: hashedPassword,
+            },
+        });
+
+        return user;
+    } 
 }
 
 export { UserRepository };

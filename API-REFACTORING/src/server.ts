@@ -1,11 +1,29 @@
+import 'express-async-errors';
+/* import cors from 'cors'; */
 import Express, { NextFunction, Request, Response } from 'express';
-import Usercontrollers from './controllers/Usercontrollers';
+/* import Usercontrollers from './controllers/Usercontrollers'; */
 import Dadoscontrollers from './controllers/Dadoscontrollers';
 import router from './routes';
 
 const app = Express();
 app.use(Express.json());
 const PORT = 8000;
+
+app.use((error: Error,req: Request,res: Response, next: NextFunction)=>{
+
+    return res.json({
+        status: 'Error',
+        message: error.message
+    });
+    next();
+});
+/* app.use((error: Error, req: Request, res: Response, next: NextFunction) => {
+  res.header('Access-Control-Allow-Origin', "*");
+  res.header("Access-Control-Allow-Headers", "*");
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+  app.use(cors());
+  next();
+}); */
 
 app.get('/', (req, res) => {
     return res.send({ message: 'hello world' });
@@ -28,7 +46,7 @@ app.use((error: Error, req: Request, res: Response, next: NextFunction) => {
     });
 });
 
-app.post('/createUser', Usercontrollers.createUser);
+/* app.post('/createUser', Usercontrollers.createUser); */
 app.post('/createDados', Dadoscontrollers.createDados);
 app.get('/listDados/:id', Dadoscontrollers.listDados);
 app.put('/updateDados', Dadoscontrollers.updateDados);
