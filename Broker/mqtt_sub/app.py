@@ -3,7 +3,7 @@ import paho.mqtt.client as paho
 import time
 import random
 #hostname
-broker="localhost"
+broker="172.18.0.2"
 #port
 port=1883
 def on_publish(client,userdata,result):

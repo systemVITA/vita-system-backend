@@ -13,7 +13,7 @@ networks:
 services:
   mqtt-pub:
     image: eclipse-mosquitto:latest
-    command: sh -c "mosquitto_pub -h mqtt_broker -t "/message" -m 'antonio'"
+    command: sh -c "mosquitto_pub -h mqtt_broker -t "/message" -m 'nerval'"
     depends_on:
         - mqtt_broker
     networks:
@@ -23,7 +23,7 @@ services:
     image: eclipse-mosquitto:latest
     container_name: my_broker
     ports:
-        - 1883:1883
+        - 1884:1883
     expose:
       - 1883
 

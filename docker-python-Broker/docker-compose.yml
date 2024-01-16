@@ -14,7 +14,7 @@ services:
 
   mqtt-pub:
     image: eclipse-mosquitto:latest
-    command: sh -c "mosquitto_pub -h mqtt_broker -t "/message" -m 'antonio'"
+    command: sh -c "mosquitto_pub -h mqtt_broker -t "/message" -m 'nerval'"
     depends_on:
       - mqtt_broker
     networks:
